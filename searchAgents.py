@@ -507,40 +507,18 @@ def foodHeuristic(state, problem):
     Subsequent calls to this heuristic can access
     problem.heuristicInfo['wallCount']
 
-    position, foodGrid = state
-    foodEatten = foodGrid.asList()
-    heuristic = 0
-    distances = []
-
-    while foodEatten:
-        for x in foodEatten:
-            distance = util.manhattanDistance (position, x)
-            distances.append ( (distance, x) )
-    
-        distance, corner = min (distances)
-
-        distances = []
-
-        heuristic += distance
-        position = corner
-        foodEatten.remove(corner)
-
-    return heuristic
-
-    
     """
    
     position, foodGrid = state
-    food = foodGrid.asList()
+    foodEaten = foodGrid.asList()
 
-    # Check if there is no food on the grid. If so, return 0.
-    if not food:
+    if not foodEaten:
         return 0
     
     # Calculate the maze distances to each food item
     distances = []
-    for food_item in food:
-        distance = mazeDistance(position, food_item, problem.startingGameState)
+    for item in foodEaten:
+        distance = mazeDistance(position, item, problem.startingGameState)
         distances.append(distance)
 
     # Return the maximum distance
